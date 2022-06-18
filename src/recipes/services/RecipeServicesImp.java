@@ -17,7 +17,25 @@ public class RecipeServicesImp implements RecipeServices {
     }
 
     @Override
-    public void saveRecipe(Recipe recipe) {
-        RecipeRepository.data.add(0, recipe);
+    public Recipe getRecipeById(Long id) {
+        if (RecipeRepository.data.get(id) != null) {
+            return RecipeRepository.data.get(id);
+        }
+        return null;
+    }
+
+    @Override
+    public Recipe saveRecipe(Recipe recipe) {
+        Long id = RecipeRepository.data.size() + 1L;
+        Recipe temp = Recipe.builder()
+                .id(id)
+                .name(recipe.getName())
+                .description(recipe.getDescription())
+                .ingredients(recipe.getIngredients())
+                .directions(recipe.getDirections())
+                .build();
+        RecipeRepository.data.put(temp.getId(), temp);
+        return temp;
+
     }
 }
