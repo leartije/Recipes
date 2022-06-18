@@ -2,11 +2,10 @@ package recipes.repositor;
 
 import recipes.entity.Recipe;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public interface RecipeRepository {
-
-    List<Recipe> data = new ArrayList<>();
+    Map<Long, Recipe> data = new HashMap<>();
 
 }

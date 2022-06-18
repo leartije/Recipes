@@ -7,6 +7,8 @@ public interface RecipeServices {
 
     public Recipe printAllRecipe();
 
-    void saveRecipe(Recipe recipe);
+    public Recipe getRecipeById(Long id);
+
+    Recipe saveRecipe(Recipe recipe);
 
 }
