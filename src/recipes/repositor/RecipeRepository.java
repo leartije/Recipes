@@ -1,11 +1,9 @@
 package recipes.repositor;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import recipes.entity.Recipe;
 
-import java.util.HashMap;
-import java.util.Map;
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-public interface RecipeRepository {
-    Map<Long, Recipe> data = new HashMap<>();
 
 }
