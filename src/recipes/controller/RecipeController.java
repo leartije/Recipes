@@ -39,6 +39,23 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable("id") Long id) {
         recipeServices.deleteRecipeById(id);
     }
+    @GetMapping(path = "/api/recipe/search/", params = {"category"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<Recipe> findByCategory(@RequestParam(required = false) String category) {
+        return recipeServices.findByCategory(category);
+    }
+
+    @GetMapping(path = "/api/recipe/search/", params = {"name"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<Recipe> findByName(@RequestParam(required = false) String name) {
+        return recipeServices.findByName(name);
+    }
+
+    @PutMapping(path = "/api/recipe/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Recipe updateRecipe(@PathVariable("id") Long id, @RequestBody @Valid Recipe recipe) {
+        return recipeServices.updateRecipe(id, recipe);
+    }
 
 
 }
