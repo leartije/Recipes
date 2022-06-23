@@ -3,11 +3,13 @@ package recipes.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,16 +30,26 @@ public class Recipe {
 
     @NotBlank
     private String name;
+
+    @NotBlank
+    private String category;
+
     @NotBlank
     private String description;
-    @ElementCollection
+
+    @UpdateTimestamp
+    LocalDateTime date;
+
     @NotNull
     @Size(min = 1)
+    @ElementCollection
     private List<String> ingredients;
+
     @NotNull
-    @ElementCollection
     @Size(min = 1)
+    @ElementCollection
     private List<String> directions;
+
 
     @Override
     public boolean equals(Object o) {

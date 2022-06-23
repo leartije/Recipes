@@ -8,7 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import recipes.entity.Recipe;
 import recipes.repositor.RecipeRepository;
 
-
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,4 +48,53 @@ public class RecipeServicesImp implements RecipeServices {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
     }
+
+    @Override
+    public List<Recipe> findByCategory(String category) {
+        if (category == null || category.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        List<Recipe> list = recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
+        if (list != null) {
+            return list;
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<Recipe> findByName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        List<Recipe> list = recipeRepository.findByNameIgnoreCaseContainsOrderByDateDesc(name);
+        if (list != null) {
+            return list;
+        }
+        return Collections.emptyList();
+    }
+
+    @Transactional
+    @Override
+    public Recipe updateRecipe(Long id, Recipe recipe) {
+        Optional<Recipe> temp = recipeRepository.findById(id);
+        if (temp.isPresent()) {
+            Recipe recipe1 = Recipe.builder()
+                    .id(id)
+                    .name(recipe.getName())
+                    .category(recipe.getCategory())
+                    .description(recipe.getDescription())
+                    .ingredients(recipe.getIngredients())
+                    .directions(recipe.getDirections())
+                    .build();
+
+            recipeRepository.save(recipe1);
+            return recipe;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
 }
