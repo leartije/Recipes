@@ -1,5 +1,5 @@
 # Recipes
-JetBrains Academy Java Backend project in 5 stages
+### JetBrains Academy Java Backend project in 5 stages
 
 ## Stage 1/5: First recipe
 
