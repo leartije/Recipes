@@ -51,6 +51,12 @@ public class Recipe {
     private List<String> directions;
 
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private User user;
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
