@@ -39,6 +39,7 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable("id") Long id) {
         recipeServices.deleteRecipeById(id);
     }
+
     @GetMapping(path = "/api/recipe/search/", params = {"category"})
     @ResponseStatus(HttpStatus.OK)
     public List<Recipe> findByCategory(@RequestParam(required = false) String category) {
@@ -56,6 +57,5 @@ public class RecipeController {
     public Recipe updateRecipe(@PathVariable("id") Long id, @RequestBody @Valid Recipe recipe) {
         return recipeServices.updateRecipe(id, recipe);
     }
-
 
 }
